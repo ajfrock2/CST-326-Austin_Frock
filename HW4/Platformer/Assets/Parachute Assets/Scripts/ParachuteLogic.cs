@@ -37,7 +37,7 @@ public class ParachuteLogic : MonoBehaviour
     {   
         Ray groundObserverRay = new(parachuteObj.transform.position, Vector3.down);
         
-        if (Physics.Raycast(groundObserverRay, out RaycastHit hitInfo))
+        if (Physics.Raycast(groundObserverRay, out RaycastHit hitInfo, 8f))
         {
             bool chuteOpen = hitInfo.distance < openDistance && hitInfo.distance > 0.01f;
             
