@@ -25,7 +25,8 @@ public class objectManager : MonoBehaviour
     private bool movingRight = true;
     private int enemiesKilled = 0;
     
-    
+    public delegate void SpeedIncreased();
+    public static event SpeedIncreased speedIncreased;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,6 +38,7 @@ public class objectManager : MonoBehaviour
 
     private void PlayerOnplayerDied()
     {
+        //Destroy enverything and reset stats
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
@@ -99,6 +101,7 @@ public class objectManager : MonoBehaviour
         if (enemiesKilled % 10 == 0)
         {
             moveInterval *= 0.80f;
+            speedIncreased?.Invoke();
         }
         //Spawn spaceship
         if (enemiesKilled % 20 == 0)
@@ -173,6 +176,7 @@ public class objectManager : MonoBehaviour
         //All enemies are dead
         if (enemiesKilled == 55)
         {
+            minimumSpeed *= 0.9f;
             ResetStats();
             SpawnEnemies();
         }
@@ -180,7 +184,6 @@ public class objectManager : MonoBehaviour
 
     private void ResetStats()
     {
-        minimumSpeed *= 0.9f;
         moveInterval = minimumSpeed;
         enemiesKilled = 0;
         stepsTaken = 0;

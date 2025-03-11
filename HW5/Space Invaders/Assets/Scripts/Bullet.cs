@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
   private Rigidbody2D myRigidbody2D;
 
   public float speed = 5;
+  public AudioClip shootSound;
   
   public delegate void ShotFired();
   public static event ShotFired shotFired;
@@ -18,6 +19,11 @@ public class Bullet : MonoBehaviour
     {
       myRigidbody2D = GetComponent<Rigidbody2D>();
       Fire();
+    }
+    
+    void Awake()
+    {
+      AudioSource.PlayClipAtPoint(shootSound, transform.position);
     }
 
     // Update is called once per frame

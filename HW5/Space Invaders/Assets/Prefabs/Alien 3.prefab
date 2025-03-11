@@ -93,8 +93,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 796aad014e2107342a60ed88af81c745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSpaceship: 0
   score: 30
   bulletPrefab: {fileID: 8210701611783931760, guid: 56dff973b031e15469f27f339d9e1ae5, type: 3}
+  deathNoise: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
 --- !u!212 &2434068207917404727
 SpriteRenderer:
   m_ObjectHideFlags: 0

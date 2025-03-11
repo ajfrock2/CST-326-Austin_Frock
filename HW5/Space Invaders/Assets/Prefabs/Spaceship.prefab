@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1954196713531062822}
   - component: {fileID: 5569542971066143899}
   - component: {fileID: 2434068207917404727}
+  - component: {fileID: 6539199348432416726}
   m_Layer: 7
   m_Name: Spaceship
   m_TagString: Untagged
@@ -95,6 +96,7 @@ MonoBehaviour:
   isSpaceship: 1
   score: 0
   bulletPrefab: {fileID: 8210701611783931760, guid: 56dff973b031e15469f27f339d9e1ae5, type: 3}
+  deathNoise: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
 --- !u!212 &2434068207917404727
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -150,3 +152,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6539199348432416726
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8602883643151113638}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 32cd71b4c4bb9094188b9d506a212d6e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

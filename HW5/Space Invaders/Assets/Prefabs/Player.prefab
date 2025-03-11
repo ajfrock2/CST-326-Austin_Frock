@@ -98,6 +98,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2457785739244962049, guid: d4511b14daaa37c468a74ed386b2583f, type: 3}
   shoottingOffset: {fileID: 8125335893176967482}
   movementSpeed: 10
+  deathNoise: {fileID: 8300000, guid: a0ca8964c08d54c5dbebf245bdc474ca, type: 3}
 --- !u!212 &6199869326049846381
 SpriteRenderer:
   m_ObjectHideFlags: 0

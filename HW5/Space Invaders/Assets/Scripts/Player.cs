@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
+  private static readonly int Died = Animator.StringToHash("Died");
   public GameObject bulletPrefab;
   public Transform shoottingOffset;
   public float movementSpeed;
+  public AudioClip deathNoise;
   
   private Animator animator;
   private Rigidbody2D rb2d;
   private bool shotFired = false;
+  private bool alive = true;
   
   public delegate void PlayerDied();
   public static event PlayerDied playerDied;
@@ -42,8 +46,14 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-      Destroy(gameObject);
-      playerDied?.Invoke();
+      if (alive)
+      {
+        Destroy(gameObject, 2f);
+        animator.SetTrigger(Died);
+        playerDied?.Invoke();
+        alive = false;
+        AudioSource.PlayClipAtPoint(deathNoise, transform.position, 1.2f);
+      }
     }
 
     private void BulletOnshotFired()
