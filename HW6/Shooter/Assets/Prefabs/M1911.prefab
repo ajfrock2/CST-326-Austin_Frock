@@ -466,6 +466,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 4145331658845149623}
   bulletSpeed: 500
   bulletLifeTime: 3
+  muzzleEffect: {fileID: 8166695432293066830}
   currentShootingMode: 0
   thisWeaponModel: 0
   isShooting: 0
@@ -473,8 +474,9 @@ MonoBehaviour:
   shootingDelay: 0.3
   bulletPerBurst: 1
   burstBulletsLeft: 0
-  spreadIntensity: 0.05
-  muzzleEffect: {fileID: 8166695432293066830}
+  spreadIntensity: 0
+  hipSpreadIntensity: 0.2
+  adsSpreadIntensity: 0.02
   reloadTime: 1.5
   magazineSize: 12
   bulletsLeft: 0

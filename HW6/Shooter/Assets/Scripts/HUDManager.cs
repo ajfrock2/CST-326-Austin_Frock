@@ -21,6 +21,9 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI tacticalAmontUI;
 
     public Sprite emptySlot;
+    public Sprite greySlot;
+
+    public GameObject reticle; 
     public static HUDManager Instance { get; set; }
     private void Awake()
     {
@@ -42,7 +45,7 @@ public class HUDManager : MonoBehaviour
         if (activeWeapon)
         {
             magazineAmmoUI.text = $"{activeWeapon.bulletsLeft / activeWeapon.bulletPerBurst}";
-            totalAmmoUI.text = $"{activeWeapon.magazineSize / activeWeapon.bulletPerBurst}";
+            totalAmmoUI.text = $"{WeaponManager.Instance.CheckAmmoLeftFor(activeWeapon.thisWeaponModel)}";
 
             Weapon.WeaponModel model = activeWeapon.thisWeaponModel;
             ammoTypeUI.sprite = GetAmmoSprite(model);
@@ -63,6 +66,15 @@ public class HUDManager : MonoBehaviour
             
             activeWeaponUI.sprite = emptySlot;
             unActiveWeaponUI.sprite = emptySlot;
+        }
+
+        if (WeaponManager.Instance.lethalCount <= 0)
+        {
+            lethalUI.sprite = greySlot;
+        }
+        if (WeaponManager.Instance.tacticalCount <= 0)
+        {
+            tacticalUI.sprite = greySlot;
         }
     }
 
@@ -102,5 +114,24 @@ public class HUDManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void UpdateThrowables()
+    {
+        lethalAmontUI.text = $"{WeaponManager.Instance.lethalCount}";
+        tacticalAmontUI.text = $"{WeaponManager.Instance.tacticalCount}";
+        
+        switch (WeaponManager.Instance.equippedLethalType)
+        {
+            case Throwable.ThrowableType.Grenade:
+                lethalUI.sprite = Resources.Load<GameObject>("Grenade").GetComponent<SpriteRenderer>().sprite;
+                break;
+        }
+        switch (WeaponManager.Instance.equippedTacticalType)
+        {
+            case Throwable.ThrowableType.Smoke_Grenade:
+                tacticalUI.sprite = Resources.Load<GameObject>("Smoke_Grenade").GetComponent<SpriteRenderer>().sprite;
+                break;
+        }
     }
 }

@@ -6,15 +6,18 @@ using UnityEngine.Serialization;
 public class Weapon : MonoBehaviour
 {
     private static readonly int Recoil = Animator.StringToHash("Recoil");
+    private static readonly int IsAds = Animator.StringToHash("isADS");
 
     public bool isActiveWeapon;
     
+    [Header("Bullet")]
     //Bullet
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     public float bulletSpeed = 30f;
     public float bulletLifeTime = 3f;
-
+    //Flash
+    public GameObject muzzleEffect;
     public enum ShootingMode
     {
         Single,
@@ -31,23 +34,27 @@ public class Weapon : MonoBehaviour
     public ShootingMode currentShootingMode;
     public WeaponModel thisWeaponModel;
     
+    [Header("Shoot")]
     //Shooting
     public bool isShooting, readyToShoot;
     public float shootingDelay = 2f;
     bool allowReset = true;
     
+    [Header("Burst")]
     //Burst
     public int bulletPerBurst = 3;
     public int burstBulletsLeft;
     
+    [Header("Spread")]
     //Spread
     public float spreadIntensity;
+    public float hipSpreadIntensity;
+    public float adsSpreadIntensity;
     
-    //Flash
-    public GameObject muzzleEffect;
 
     internal Animator animator;
     
+    [Header("Reload")]
     //Reloading
     public float reloadTime = 2f;
     public int magazineSize, bulletsLeft;
@@ -55,6 +62,8 @@ public class Weapon : MonoBehaviour
     
     public Vector3 spawnPosition;
     public Vector3 spawnRotation;
+
+    private bool isADS;
     private void Awake()
     {
         readyToShoot = true;
@@ -62,12 +71,22 @@ public class Weapon : MonoBehaviour
         animator = GetComponent<Animator>();
         
         bulletsLeft = magazineSize;
+        spreadIntensity = hipSpreadIntensity;
     }
     
     void Update()
     {
         if (isActiveWeapon)
         {
+            if (Input.GetMouseButtonDown(1))
+            {
+                EnterADS();
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                ExitADS();
+            }
+            
             GetComponent<Outline>().enabled = false;
             if (bulletsLeft == 0 && isShooting)
             {
@@ -85,12 +104,12 @@ public class Weapon : MonoBehaviour
             }
 
             //Reloading
-            if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !isReloading)
+            if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !isReloading && WeaponManager.Instance.CheckAmmoLeftFor(thisWeaponModel) > 0)
             {
                 Reload();
             }
 
-            if (readyToShoot && !isShooting && !isReloading && bulletsLeft <= 0)
+            if (readyToShoot && !isShooting && !isReloading && bulletsLeft <= 0 && WeaponManager.Instance.CheckAmmoLeftFor(thisWeaponModel) > 0)
             {
                 Reload();
             }
@@ -105,13 +124,37 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    private void EnterADS()
+    {
+        animator.SetTrigger("enterADS");
+        isADS = true;
+        HUDManager.Instance.reticle.SetActive(false);
+        spreadIntensity = adsSpreadIntensity;
+    }
+    
+    private void ExitADS()
+    {
+        animator.SetTrigger("exitADS");
+        isADS = false;
+        HUDManager.Instance.reticle.SetActive(true);
+        spreadIntensity = hipSpreadIntensity;
+    }
+
     private void FireWeapon()
     {
         
         bulletsLeft--;
         
         muzzleEffect.GetComponent<ParticleSystem>().Play();
-        animator.SetTrigger(Recoil);
+        if (isADS)
+        {
+            animator.SetTrigger("ADS Recoil");
+        }
+        else
+        {
+            animator.SetTrigger(Recoil);
+        }
+        
         
         SoundManager.Instance.PlayShootingSound(thisWeaponModel);
         
@@ -152,7 +195,16 @@ public class Weapon : MonoBehaviour
 
     private void ReloadCompleted()
     {
-        bulletsLeft = magazineSize;
+        if (WeaponManager.Instance.CheckAmmoLeftFor(thisWeaponModel) > magazineSize)
+        {
+            bulletsLeft = magazineSize;
+            WeaponManager.Instance.DecreaseTotalAmmo(bulletsLeft, thisWeaponModel);
+        }
+        else
+        {
+            bulletsLeft = WeaponManager.Instance.CheckAmmoLeftFor(thisWeaponModel);
+            WeaponManager.Instance.DecreaseTotalAmmo(bulletsLeft, thisWeaponModel);
+        }
         isReloading = false;
     }
 
