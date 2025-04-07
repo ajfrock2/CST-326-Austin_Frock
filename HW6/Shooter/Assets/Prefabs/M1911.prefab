@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9089097681529453204}
   - component: {fileID: 5641183988550564193}
   - component: {fileID: 8022991236481799265}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: M1911
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 2694598102992017571}
   - component: {fileID: 4999076961060496866}
   - component: {fileID: 587006690217178142}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1143846699095324927}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CINEMA_4D_Editor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 5840142095532107039}
   - component: {fileID: 717149626006295369}
   - component: {fileID: 4000621012844155823}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Slide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 3339741853111515284}
   - component: {fileID: 5909581876366254389}
   - component: {fileID: 1799124560511237651}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Magazin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4145331658845149623}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bullet Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ Transform:
   m_GameObject: {fileID: 5500718515338499979}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.0309, z: -0.1568}
+  m_LocalPosition: {x: 0, y: 0.0309, z: -0.16}
   m_LocalScale: {x: 0.075, y: 0.075, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 950752273487959095}
   - component: {fileID: 3697065786391911698}
   - component: {fileID: 5436166968743742354}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: M1911
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,6 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiveWeapon: 0
+  weaponDamage: 0
   bulletPrefab: {fileID: 5219471257733170105, guid: 9e34d7f82f2db3b46b21ee330670af96, type: 3}
   bulletSpawn: {fileID: 4145331658845149623}
   bulletSpeed: 500
@@ -476,7 +477,7 @@ MonoBehaviour:
   burstBulletsLeft: 0
   spreadIntensity: 0
   hipSpreadIntensity: 0.2
-  adsSpreadIntensity: 0.02
+  adsSpreadIntensity: 0.1
   reloadTime: 1.5
   magazineSize: 12
   bulletsLeft: 0
@@ -555,7 +556,7 @@ GameObject:
   - component: {fileID: 365319633495349372}
   - component: {fileID: 4111028375227392433}
   - component: {fileID: 2658020859113551803}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: MuzzleFlashEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5341,7 +5342,7 @@ GameObject:
   - component: {fileID: 2712882087560380306}
   - component: {fileID: 7332234333854228529}
   - component: {fileID: 5386856272246763800}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

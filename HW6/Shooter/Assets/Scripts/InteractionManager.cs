@@ -33,6 +33,12 @@ public class InteractionManager : MonoBehaviour
             //Guns
             if (objHitByRaycast.GetComponent<Weapon>() && objHitByRaycast.GetComponent<Weapon>().isActiveWeapon == false)
             {
+
+                if (hoveredWeapon)
+                {
+                    hoveredWeapon.GetComponent<Outline>().enabled = false;
+                }
+                
                 hoveredWeapon = objHitByRaycast.gameObject.GetComponent<Weapon>();
                 hoveredWeapon.GetComponent<Outline>().enabled = true;
 
@@ -51,6 +57,11 @@ public class InteractionManager : MonoBehaviour
             //AmmoBox
             if (objHitByRaycast.GetComponent<AmmoBox>())
             {
+                if (hoveredAmmoBox)
+                {
+                    hoveredAmmoBox.GetComponent<Outline>().enabled = false;
+                }
+                
                 hoveredAmmoBox = objHitByRaycast.gameObject.GetComponent<AmmoBox>();
                 hoveredAmmoBox.GetComponent<Outline>().enabled = true;
 
@@ -71,6 +82,11 @@ public class InteractionManager : MonoBehaviour
             //Throwables
             if (objHitByRaycast.GetComponent<Throwable>())
             {
+                if (hoveredThrowable)
+                {
+                    hoveredThrowable.GetComponent<Outline>().enabled = false;
+                }
+                
                 hoveredThrowable = objHitByRaycast.gameObject.GetComponent<Throwable>();
                 hoveredThrowable.GetComponent<Outline>().enabled = true;
 

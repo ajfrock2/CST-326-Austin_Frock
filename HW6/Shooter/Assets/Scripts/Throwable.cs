@@ -99,6 +99,10 @@ public class Throwable : MonoBehaviour
             }
             
             //FUTURE Apply damage
+            if (objectInRange.gameObject.GetComponent<Enemy>())
+            {
+                objectInRange.gameObject.GetComponent<Enemy>().TakeDamage(100);
+            }
         }
     }
 }

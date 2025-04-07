@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     private static readonly int IsAds = Animator.StringToHash("isADS");
 
     public bool isActiveWeapon;
+    public int weaponDamage;
     
     [Header("Bullet")]
     //Bullet
@@ -78,6 +79,13 @@ public class Weapon : MonoBehaviour
     {
         if (isActiveWeapon)
         {
+            //Camera clipping, TODO issue with pistol, not children of chidren are on layer causing clip issues
+            gameObject.layer = LayerMask.NameToLayer("WeaponRender");
+            foreach (Transform child in transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("WeaponRender");
+            }
+            
             if (Input.GetMouseButtonDown(1))
             {
                 EnterADS();
@@ -122,6 +130,15 @@ public class Weapon : MonoBehaviour
             }
             
         }
+        else
+        {
+            //Camera clipping 
+            gameObject.layer = LayerMask.NameToLayer("Default");
+            foreach (Transform child in transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("Default");
+            }
+        }
     }
 
     private void EnterADS()
@@ -146,6 +163,23 @@ public class Weapon : MonoBehaviour
         bulletsLeft--;
         
         muzzleEffect.GetComponent<ParticleSystem>().Play();
+        
+        SoundManager.Instance.PlayShootingSound(thisWeaponModel);
+        
+        readyToShoot = false;
+
+        Vector3 shootingDirection = CalculateDirectionsAndSpread().normalized;
+        //Instantiate, shoot, and destroy bullet
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
+        Bullet bul = bullet.GetComponent<Bullet>();
+        bul.bulletDamage = weaponDamage;
+        
+        
+        bullet.transform.forward = shootingDirection;
+        bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * bulletSpeed, ForceMode.Impulse);
+        
+        StartCoroutine(DestroyBulletAfterTime(bullet, bulletLifeTime));
+
         if (isADS)
         {
             animator.SetTrigger("ADS Recoil");
@@ -155,20 +189,6 @@ public class Weapon : MonoBehaviour
             animator.SetTrigger(Recoil);
         }
         
-        
-        SoundManager.Instance.PlayShootingSound(thisWeaponModel);
-        
-        readyToShoot = false;
-
-        Vector3 shootingDirection = CalculateDirectionsAndSpread().normalized;
-        //Instantiate, shoot, and destroy bullet
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
-        
-        bullet.transform.forward = shootingDirection;
-        bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * bulletSpeed, ForceMode.Impulse);
-        
-        StartCoroutine(DestroyBulletAfterTime(bullet, bulletLifeTime));
-
         //Check if we are done shooting
         if (allowReset)
         {
@@ -223,7 +243,15 @@ public class Weapon : MonoBehaviour
        if (Physics.Raycast(ray, out hit))
        {
            //Hit something
-           targetPoint = hit.point;
+           if (hit.distance > 2f)
+           {
+               targetPoint = hit.point;
+           }
+           //Dealing with ADS bug
+           else
+           {
+               targetPoint = ray.GetPoint(10f);
+           }
        }
        else
        {

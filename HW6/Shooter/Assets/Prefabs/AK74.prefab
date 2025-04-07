@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5960608311361703405}
   - component: {fileID: 5508858210164278073}
   - component: {fileID: 5643908030012540849}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3996893645418981896}
   - component: {fileID: 1686512725671819023}
   - component: {fileID: 8875138965467762714}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2534060604974509360}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bullet Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 7060906653305694354}
   - component: {fileID: 6498279683942362703}
   - component: {fileID: 9114077344582630571}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: MuzzleFlashEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5001,7 +5001,7 @@ GameObject:
   - component: {fileID: 7853120042978005335}
   - component: {fileID: 3806494113030014156}
   - component: {fileID: 6130974099155305833}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5091,7 +5091,7 @@ GameObject:
   - component: {fileID: 2646542519677370216}
   - component: {fileID: 2986561475911485790}
   - component: {fileID: 5942192408388681340}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: AK74
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5187,6 +5187,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 2534060604974509360}
   bulletSpeed: 700
   bulletLifeTime: 3
+  muzzleEffect: {fileID: 7474969919205363293}
   currentShootingMode: 2
   thisWeaponModel: 1
   isShooting: 0
@@ -5195,7 +5196,8 @@ MonoBehaviour:
   bulletPerBurst: 1
   burstBulletsLeft: 0
   spreadIntensity: 0.3
-  muzzleEffect: {fileID: 7474969919205363293}
+  hipSpreadIntensity: 0
+  adsSpreadIntensity: 0
   reloadTime: 2
   magazineSize: 30
   bulletsLeft: 0
